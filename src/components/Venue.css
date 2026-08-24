@@ -1,0 +1,145 @@
+.venue {
+  padding: var(--space-2xl) var(--space-md);
+}
+
+.venue__container {
+  display: flex;
+  justify-content: center;
+}
+
+.venue__card {
+  width: 100%;
+  max-width: 700px;
+  padding: var(--space-2xl) clamp(1.2rem, 5vw, 3rem) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  border-radius: 50% 50% var(--radius-lg) var(--radius-lg) / 12% 12% 0 0;
+  margin-top: 2rem;
+}
+
+/* ── Arch top ──────────────────────────────────────────────── */
+.venue__arch-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: -3rem;
+}
+
+.venue__wings {
+  animation: floatUp 8s ease-in-out infinite;
+  filter: drop-shadow(0 4px 14px rgba(249,208,220,0.5));
+}
+
+.venue__monogram {
+  background: var(--color-blush-light);
+}
+
+/* ── Header ────────────────────────────────────────────────── */
+.venue__header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* ── Details ───────────────────────────────────────────────── */
+.venue__details {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.venue__name {
+  font-family: var(--font-script);
+  font-size: clamp(1.6rem, 5vw, 3rem);
+  color: var(--color-brown);
+  line-height: 1.1;
+}
+
+.venue__address {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--color-text-mid);
+  font-style: normal;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.venue__landmark {
+  font-style: italic;
+  color: var(--color-text-soft);
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
+  margin-top: 0.3rem;
+}
+
+.venue__map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.5rem;
+  border: 1.5px solid var(--color-rose-dark);
+  border-radius: 100px;
+  font-family: var(--font-serif);
+  font-size: var(--fs-label);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-brown);
+  background: var(--color-blush-light);
+  transition: background var(--transition-base), transform var(--transition-base);
+  touch-action: manipulation;
+}
+
+.venue__map-link:hover,
+.venue__map-link:focus-visible,
+.venue__map-link:active {
+  background: var(--color-blush);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+/* ── Map embed ─────────────────────────────────────────────── */
+.venue__map-wrap {
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1.5px solid var(--color-blush);
+  aspect-ratio: 16/9;
+}
+
+.venue__map {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* ── Venue closing message ───────────────────────────────── */
+.venue__closing {
+  text-align: center;
+  padding-top: var(--space-xs);
+}
+
+.venue__closing-msg {
+  font-family: var(--font-script);
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  color: var(--color-brown);
+  line-height: 1.2;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .venue__card {
+    border-radius: var(--radius-lg);
+  }
+
+  .venue__map-wrap {
+    aspect-ratio: 4/3;
+  }
+}

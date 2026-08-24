@@ -1,0 +1,232 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(2rem, 6vw, 4rem) var(--space-md);
+  /* overflow:visible lets content bleed through the seam */
+  overflow: visible;
+}
+
+/* Soft bottom fade so the striped hero bleeds into SaveTheDate */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(249, 208, 220, 0.55) 100%
+  );
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ── Sparkles ──────────────────────────────────────────────── */
+.hero__sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sparkle {
+  position: absolute;
+  width: clamp(4px, 1vw, 8px);
+  height: clamp(4px, 1vw, 8px);
+  border-radius: 50%;
+  background: var(--color-rose);
+  opacity: 0;
+  animation: sparkleFade 4s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.35s);
+  left: calc(var(--i) * 8% + 2%);
+  top: calc(var(--i) * 7% + 5%);
+}
+
+.sparkle:nth-child(odd) {
+  background: var(--color-gold);
+  width: clamp(3px, 0.8vw, 6px);
+  height: clamp(3px, 0.8vw, 6px);
+}
+
+@keyframes sparkleFade {
+  0%, 100% { opacity: 0; transform: scale(0.5) translateY(0); }
+  50%       { opacity: 0.8; transform: scale(1.2) translateY(-12px); }
+}
+
+/* ── Top name block ────────────────────────────────────────── */
+.hero__name-top,
+.hero__name-bottom {
+  width: 100%;
+  text-align: center;
+  z-index: 2;
+  animation: fadeIn 1.2s ease both;
+}
+
+.hero__name-bottom {
+  animation-delay: 0.3s;
+}
+
+.hero__name-script {
+  font-family: var(--font-script);
+  line-height: 1;
+  color: var(--color-brown);
+  text-shadow: 0 2px 12px rgba(92,51,23,0.12);
+  letter-spacing: 0.02em;
+}
+
+.hero__first-name {
+  font-size: var(--fs-hero-name);
+}
+
+.hero__last-name {
+  font-size: var(--fs-script-lg);
+  color: var(--color-brown-mid);
+}
+
+/* ── Center block — unified tap target ───────────────────── */
+.hero__center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  z-index: 2;
+  flex: 1;
+  justify-content: center;
+  cursor: pointer;
+  /* Widen tap area slightly beyond the visual card */
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-lg);
+  transition: transform var(--transition-base);
+  /* No outline by default; shown on keyboard focus only */
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* Hover / active: lift the whole cluster */
+.hero__center:hover .envelope__body,
+.hero__center:focus-visible .envelope__body {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-float);
+}
+
+.hero__center:active {
+  transform: scale(0.97);
+}
+
+.hero__center:focus-visible {
+  outline: 2px solid var(--color-rose-dark);
+  outline-offset: 8px;
+}
+
+.hero__wings-wrap {
+  animation: wingsFlap 6s ease-in-out infinite, fadeIn 1.4s ease both;
+  margin-bottom: -24px;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 6px 20px rgba(249,208,220,0.6));
+}
+
+/* ── Envelope (now a plain div — parent handles interaction) ─ */
+.hero__envelope {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  animation: envelopeFloat 5s ease-in-out infinite, fadeIn 1.6s ease both;
+  position: relative;
+  z-index: 2;
+  pointer-events: none; /* parent hero__center handles all clicks */
+}
+
+.envelope__body {
+  position: relative;
+  width: clamp(220px, 52vw, 340px);
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: clamp(1.5rem, 4vw, 2.2rem) clamp(1.2rem, 3vw, 1.8rem);
+  border: 1.5px solid var(--color-blush);
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+  overflow: hidden;
+}
+
+.envelope__flap {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 28%;
+  background: var(--color-blush-light);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  border-bottom: 1.5px solid var(--color-blush);
+}
+
+.envelope__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding-top: var(--space-md);
+}
+
+.envelope__card-label {
+  font-family: var(--font-serif);
+  font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-brown);
+  font-weight: 500;
+}
+
+.envelope__card-divider {
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-rose), transparent);
+  margin: var(--space-xs) 0;
+}
+
+.envelope__tagline {
+  font-family: var(--font-script);
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  color: var(--color-rose-dark);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.envelope__date-peek {
+  font-family: var(--font-serif);
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  letter-spacing: 0.18em;
+  color: var(--color-brown-light);
+  margin-top: var(--space-xs);
+}
+
+.envelope__hint {
+  font-family: var(--font-serif);
+  font-size: clamp(0.65rem, 1.3vw, 0.82rem);
+  letter-spacing: 0.15em;
+  color: var(--color-text-soft);
+  text-transform: uppercase;
+  animation: countPulse 3s ease-in-out infinite;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .hero {
+    padding: 1.5rem var(--space-sm);
+  }
+
+  .hero__wings-wrap {
+    margin-bottom: -16px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .hero {
+    padding: clamp(3rem, 5vw, 5rem) var(--space-xl);
+  }
+}

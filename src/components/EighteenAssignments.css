@@ -1,0 +1,300 @@
+.eighteen {
+  padding: var(--space-2xl) var(--space-md);
+}
+
+.eighteen__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+/* ── Section header ────────────────────────────────────────── */
+.eighteen__header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  max-width: 540px;
+}
+
+.eighteen__wings-wrap {
+  animation: floatUp 7s ease-in-out infinite;
+  filter: drop-shadow(0 4px 14px rgba(249,208,220,0.5));
+}
+
+.eighteen__monogram {
+  background: var(--color-blush-light);
+  margin-top: var(--space-xs);
+}
+
+.eighteen__title {
+  color: var(--color-brown);
+}
+
+.eighteen__subtitle {
+  text-align: center;
+  color: var(--color-text-mid);
+  font-style: italic;
+  max-width: 400px;
+}
+
+/* ── Carousel Wrapper ──────────────────────────────────────── */
+.eighteen__carousel-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 2.5vw, 1.5rem);
+  width: 100%;
+  max-width: 660px;
+  margin: 0 auto;
+  outline: none;
+}
+
+.carousel-stage {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Segment card (Carousel Item) ─────────────────────────── */
+.segment-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  border: 1.5px solid var(--color-blush);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-card {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  transition:
+    opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0.4s ease;
+  pointer-events: none;
+  width: 100%;
+}
+
+.carousel-card--active {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  pointer-events: auto;
+  z-index: 2;
+  box-shadow: var(--shadow-float);
+}
+
+/* Arch top stripe */
+.segment-card__top {
+  background: linear-gradient(135deg, var(--color-blush-light), var(--color-blush));
+  padding: var(--space-md) var(--space-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.segment-card__icon {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  line-height: 1;
+}
+
+.segment-card__title {
+  font-family: var(--font-script);
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  color: var(--color-brown);
+  line-height: 1.1;
+}
+
+.segment-card__divider {
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-rose-dark), transparent);
+  margin-top: var(--space-xs);
+}
+
+/* Names list — internally scrollable for long lists */
+.segment-card__list {
+  padding: var(--space-md) var(--space-lg) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  list-style: none;
+  flex: 1;
+  max-height: clamp(300px, 45vh, 460px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-rose) var(--color-blush-light);
+}
+
+.segment-card__list::-webkit-scrollbar {
+  width: 6px;
+}
+.segment-card__list::-webkit-scrollbar-track {
+  background: var(--color-blush-light);
+  border-radius: 3px;
+}
+.segment-card__list::-webkit-scrollbar-thumb {
+  background: var(--color-rose);
+  border-radius: 3px;
+}
+
+.segment-card__item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.35rem 0.25rem;
+  border-bottom: 1px solid rgba(232,160,180,0.18);
+  transition: background var(--transition-base);
+}
+
+.segment-card__item:last-child {
+  border-bottom: none;
+}
+
+.segment-card__item:hover {
+  background: var(--color-blush-light);
+  border-radius: var(--radius-sm);
+  padding-left: 0.5rem;
+}
+
+.segment-card__num {
+  font-family: var(--font-serif);
+  font-size: var(--fs-label);
+  color: var(--color-rose-dark);
+  letter-spacing: 0.05em;
+  min-width: 1.8rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.segment-card__name {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--color-text-dark);
+  line-height: 1.35;
+}
+
+/* ── Arrow Buttons ─────────────────────────────────────────── */
+.carousel-btn {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid var(--color-rose-dark);
+  color: var(--color-brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(92, 51, 23, 0.14);
+  transition:
+    background var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+  touch-action: manipulation;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.carousel-btn:hover,
+.carousel-btn:focus-visible {
+  background: var(--color-blush);
+  box-shadow: 0 6px 22px rgba(92, 51, 23, 0.22);
+  transform: translateY(-2px) scale(1.05);
+  outline: none;
+}
+
+.carousel-btn:focus-visible {
+  outline: 2px solid var(--color-rose-dark);
+  outline-offset: 3px;
+}
+
+.carousel-btn:active {
+  transform: scale(0.94);
+}
+
+/* ── Indicators (Dots & Counter) ───────────────────────────── */
+.eighteen__indicators {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: var(--space-xs);
+}
+
+.indicator-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.indicator-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-blush);
+  border: 1.5px solid var(--color-rose-dark);
+  cursor: pointer;
+  transition:
+    background var(--transition-base),
+    transform var(--transition-base),
+    width var(--transition-base);
+  padding: 0;
+}
+
+.indicator-dot:hover,
+.indicator-dot:focus-visible {
+  transform: scale(1.2);
+  outline: none;
+}
+
+.indicator-dot--active {
+  background: var(--color-rose-dark);
+  width: 26px;
+  border-radius: 12px;
+}
+
+.indicator-counter {
+  font-family: var(--font-serif);
+  font-size: var(--fs-label);
+  letter-spacing: 0.15em;
+  color: var(--color-text-mid);
+  font-weight: 500;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .eighteen__carousel-wrap {
+    gap: 0.25rem;
+  }
+
+  .carousel-btn {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .segment-card__list {
+    max-height: clamp(280px, 45vh, 400px);
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+  }
+}
+

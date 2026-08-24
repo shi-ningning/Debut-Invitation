@@ -1,0 +1,16 @@
+/* Page entrance transition */
+.page {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Reserve space for the fixed navbar */
+  padding-top: 0;
+  min-height: 100svh;
+}
+
+.page--visible {
+  opacity: 1;
+  transform: translateY(0);
+}

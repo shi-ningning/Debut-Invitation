@@ -1,0 +1,241 @@
+/* ============================================================
+   NAVBAR — top bar + mobile menu
+   ============================================================ */
+
+/* ── Header bar ────────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem clamp(1rem, 4vw, 2.5rem);
+  background: rgba(255, 240, 245, 0.72);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom: 1px solid rgba(232, 160, 180, 0.25);
+  transition:
+    box-shadow var(--transition-base),
+    background var(--transition-base);
+}
+
+.navbar--scrolled {
+  box-shadow: 0 4px 24px rgba(92, 51, 23, 0.10);
+  background: rgba(255, 240, 245, 0.92);
+}
+
+/* On the hero page make it slightly more transparent so it doesn't compete */
+.navbar--home {
+  background: rgba(255, 240, 245, 0.55);
+}
+.navbar--home.navbar--scrolled {
+  background: rgba(255, 240, 245, 0.88);
+}
+
+/* ── Logo / monogram ───────────────────────────────────────── */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar__monogram {
+  width: 2.4rem;
+  height: 2.4rem;
+  font-size: 0.95rem;
+  background: var(--color-blush-light);
+  border-color: var(--color-rose-dark);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.navbar__logo:hover .navbar__monogram,
+.navbar__logo:focus-visible .navbar__monogram {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 4px rgba(249, 208, 220, 0.5);
+}
+
+.navbar__logo:focus-visible {
+  outline: none;
+}
+
+/* ── Desktop nav links ─────────────────────────────────────── */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.8rem, 2.5vw, 2rem);
+}
+
+.navbar__link {
+  font-family: var(--font-serif);
+  font-size: clamp(0.72rem, 1.2vw, 0.9rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-mid);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  position: relative;
+  transition: color var(--transition-base);
+}
+
+/* Animated underline */
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 1.5px;
+  background: var(--color-rose-dark);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-base);
+}
+
+.navbar__link:hover,
+.navbar__link:focus-visible {
+  color: var(--color-brown);
+  outline: none;
+}
+
+.navbar__link:hover::after,
+.navbar__link:focus-visible::after,
+.navbar__link--active::after {
+  transform: scaleX(1);
+}
+
+.navbar__link--active {
+  color: var(--color-brown);
+  font-weight: 500;
+}
+
+/* ── Hamburger button ──────────────────────────────────────── */
+.navbar__burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0.3rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-base);
+  flex-shrink: 0;
+}
+
+.navbar__burger:focus-visible {
+  outline: 2px solid var(--color-rose-dark);
+  outline-offset: 2px;
+}
+
+.navbar__burger span {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--color-brown);
+  border-radius: 2px;
+  transform-origin: center;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+/* Animate to X when open */
+.navbar__burger--open span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.navbar__burger--open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.navbar__burger--open span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* ── Mobile menu ───────────────────────────────────────────── */
+.navbar__mobile {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  background: var(--color-blush-light);
+  border-bottom: 1px solid var(--color-blush);
+  padding: 5rem 2rem 2rem;
+  transform: translateY(-105%);
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 8px 32px rgba(92,51,23,0.12);
+}
+
+.navbar__mobile--open {
+  transform: translateY(0);
+}
+
+.navbar__mobile nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.navbar__mobile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 3vw, 1.15rem);
+  letter-spacing: 0.1em;
+  color: var(--color-text-mid);
+  text-decoration: none;
+  transition: background var(--transition-base), color var(--transition-base);
+}
+
+.navbar__mobile-link:focus-visible {
+  outline: 2px solid var(--color-rose-dark);
+  outline-offset: 2px;
+}
+
+.navbar__mobile-link:hover {
+  background: var(--color-blush);
+  color: var(--color-brown);
+}
+
+.navbar__mobile-link--active {
+  background: var(--color-blush);
+  color: var(--color-brown);
+  font-weight: 500;
+}
+
+.navbar__mobile-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* ── Backdrop overlay ──────────────────────────────────────── */
+.navbar__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  background: rgba(92, 51, 23, 0.25);
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.2s ease both;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .navbar__links {
+    display: none;
+  }
+
+  .navbar__burger {
+    display: flex;
+  }
+}
+
+@media (min-width: 769px) {
+  .navbar__mobile,
+  .navbar__overlay {
+    display: none !important;
+  }
+}

@@ -1,0 +1,68 @@
+/* ============================================================
+   DESIGN TOKENS — global CSS custom properties
+   ============================================================ */
+
+:root {
+  /* ── Color Palette ─────────────────────────────────────── */
+  --color-blush:        #F9D0DC;
+  --color-blush-deep:   #F4A7B9;
+  --color-blush-light:  #FFF0F5;
+  --color-rose:         #E8A0B4;
+  --color-rose-dark:    #C97FA0;
+  --color-white:        #FFFFFF;
+  --color-cream:        #FDF6F0;
+  --color-brown:        #5C3317;
+  --color-brown-mid:    #7A4728;
+  --color-brown-light:  #A0714F;
+  --color-stripe-a:     #FBE0E8;   /* lighter stripe */
+  --color-stripe-b:     #FFFFFF;   /* white stripe   */
+  --color-text-dark:    #3A2010;
+  --color-text-mid:     #7A4728;
+  --color-text-soft:    #A87878;
+  --color-gold:         #C9A96E;
+
+  /* ── Typography ────────────────────────────────────────── */
+  --font-script:  'Alex Brush', cursive;
+  --font-serif:   'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  --font-body:    'EB Garamond', Georgia, serif;
+
+  /* ── Font Sizes (fluid via clamp) ──────────────────────── */
+  --fs-hero-name:   clamp(3.5rem, 12vw, 9rem);
+  --fs-script-lg:   clamp(2.5rem, 7vw, 6rem);
+  --fs-script-md:   clamp(1.8rem, 4.5vw, 3.5rem);
+  --fs-script-sm:   clamp(1.3rem, 3vw, 2.2rem);
+  --fs-heading:     clamp(1.1rem, 2.5vw, 1.6rem);
+  --fs-subheading:  clamp(0.85rem, 1.8vw, 1.15rem);
+  --fs-body:        clamp(0.95rem, 1.6vw, 1.1rem);
+  --fs-label:       clamp(0.7rem, 1.2vw, 0.9rem);
+
+  /* ── Spacing ───────────────────────────────────────────── */
+  --space-xs:   0.4rem;
+  --space-sm:   0.75rem;
+  --space-md:   1.25rem;
+  --space-lg:   2rem;
+  --space-xl:   3.5rem;
+  --space-2xl:  6rem;
+
+  /* ── Borders & Shadows ─────────────────────────────────── */
+  --radius-sm:  0.5rem;
+  --radius-md:  1rem;
+  --radius-lg:  2rem;
+  --radius-arch: 50% 50% 0 0 / 60% 60% 0 0;  /* arch top */
+  --shadow-soft: 0 4px 24px rgba(92, 51, 23, 0.10);
+  --shadow-card: 0 8px 40px rgba(92, 51, 23, 0.14);
+  --shadow-float: 0 12px 48px rgba(92, 51, 23, 0.18);
+
+  /* ── Stripe pattern ────────────────────────────────────── */
+  --stripe-bg: repeating-linear-gradient(
+    -55deg,
+    var(--color-stripe-a) 0px,
+    var(--color-stripe-a) 18px,
+    var(--color-stripe-b) 18px,
+    var(--color-stripe-b) 36px
+  );
+
+  /* ── Transitions ───────────────────────────────────────── */
+  --transition-base: 0.28s ease;
+  --transition-slow: 0.55s ease;
+}

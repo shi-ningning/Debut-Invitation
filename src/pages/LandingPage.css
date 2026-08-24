@@ -1,0 +1,182 @@
+/* ============================================================
+   LANDING PAGE — full-viewport cover / splash screen
+   ============================================================ */
+
+/*
+ * Landing has NO NavBar, so override the body padding-top that was added
+ * for the fixed nav. We target .landing directly as the root element.
+ */
+.landing {
+  position: fixed;           /* Lock to viewport — no scrolling */
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1rem, 3vh, 3.5rem) var(--space-md);
+  overflow: hidden;
+  /* Entrance: page fades+slides in */
+  animation: landingEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* Exit transition trigger — see landing--exiting */
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.4, 0, 1, 1);
+  z-index: 1200; /* sits above everything, including NavBar */
+}
+
+/* Entrance keyframe */
+@keyframes landingEnter {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Exit animation ─────────────────────────────────────── */
+/* Applied when user taps — scale up and fade to white */
+.landing--exiting {
+  opacity: 0;
+  transform: scale(1.08);
+  pointer-events: none; /* block double-taps during transition */
+}
+
+/* ── Sparkles ──────────────────────────────────────────────── */
+.landing__sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ── Top name block ─────────────────────────────────────────── */
+.landing__name-top,
+.landing__name-bottom {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 4;
+  flex-shrink: 0;
+  animation: landingNameIn 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.landing__name-bottom {
+  animation-delay: 0.25s;
+}
+
+@keyframes landingNameIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* The cursive name text */
+.landing__name-script {
+  font-family: var(--font-script);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  /*
+   * Explicit dark brown + white text-shadow so it reads against
+   * both the pale-pink stripe AND the white stripe.
+   */
+  color: #5C3317;                         /* --color-brown */
+  text-shadow:
+    0 0 16px rgba(255, 255, 255, 0.95),   /* white halo to lift off white stripe */
+    0 2px 12px rgba(92, 51, 23, 0.25);    /* soft brown drop shadow */
+  display: block;
+}
+
+.landing__first-name {
+  font-size: clamp(2.4rem, 8vw, 6.5rem);
+}
+
+.landing__last-name {
+  font-size: clamp(1.8rem, 5.5vw, 4.5rem);
+  color: #7A4728;                         /* --color-brown-mid, slightly lighter */
+}
+
+/* Lace divider variants */
+.landing__lace {
+  max-width: 260px;
+  margin: 0.5rem auto;
+  opacity: 0.8;
+}
+
+/* ── Center block — full tap target ─────────────────────────── */
+.landing__center {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  cursor: pointer;
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-lg);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  outline: none;
+  transition: transform var(--transition-base);
+}
+
+.landing__center:hover .envelope__body,
+.landing__center:focus-visible .envelope__body {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-float);
+}
+
+.landing__center:active {
+  transform: scale(0.97);
+}
+
+.landing__center:focus-visible {
+  outline: 2px solid var(--color-rose-dark);
+  outline-offset: 8px;
+  border-radius: var(--radius-lg);
+}
+
+/* ── Wings ──────────────────────────────────────────────────── */
+.landing__wings-wrap {
+  animation: wingsFlap 6s ease-in-out infinite, fadeIn 1.4s ease both;
+  margin-bottom: -24px;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 6px 20px rgba(249, 208, 220, 0.65));
+  pointer-events: none;
+}
+
+/* ── Envelope ───────────────────────────────────────────────── */
+.landing__envelope {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  animation: envelopeFloat 5s ease-in-out infinite, fadeIn 1.6s ease both;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 1, 1), opacity 0.5s ease;
+}
+
+/* When exiting: envelope scales up and fades out faster than the whole page */
+.landing__envelope--open {
+  transform: scale(1.15) translateY(-12px);
+  opacity: 0;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .landing {
+    padding: 2rem var(--space-sm);
+  }
+
+  .landing__wings-wrap {
+    margin-bottom: -12px;
+  }
+
+  .landing__center {
+    padding: var(--space-sm) var(--space-md);
+  }
+}
+
+@media (min-width: 1025px) {
+  .landing {
+    padding: clamp(3.5rem, 6vw, 6rem) var(--space-xl);
+  }
+}
